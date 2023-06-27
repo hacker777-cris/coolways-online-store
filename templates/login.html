@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - legion Store</title>
+  <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">
+        <h1>legion Kenya</h1>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Login Form -->
+  <section class="login-form">
+    <div class="container">
+      <h2>Login</h2>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+      <p class="register-link">Don't have an account? <a href="{% url 'signup' %}">Register</a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 My Online Store. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+{% endblock %}

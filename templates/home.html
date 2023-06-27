@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Online Store</title>
+  <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">
+        <h1>LEGION STORE</h1>
+      </div>
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="{% url 'categories' %}">Categories</a></li>
+        <li><a href="{% url 'profile' %}">{{request.user}}</a></li>
+        <li><a href="{% url 'cart' %}">Cart</a></li>
+      </ul>
+      <form class="search-bar" method="GET" action="">
+        <input type="text" name="q" placeholder="Search...">
+        <button type="submit">Search</button>
+      </form>
+      
+    </nav>
+  </header>
+  <div class="categories-container">
+    <h3>Categories</h3>
+    <div class="category-list">
+      {% for category in categories %}
+        <div class="category-card">
+          <img src="{% static 'category_image.jpg' %}" alt="{{ category.name }}" class="category-image">
+          <h4 class="category-name">{{ category.name }}</h4>
+          <!-- Add more category details or links here -->
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- Main Content -->
+  <main>
+    <section class="featured-products">
+      <h3>Featured Products</h3>
+      <div class="product-list">
+        <div class="product-list">
+            {% for product in products %}
+            <div class="product-card">
+              {% if product.image %}
+              <img src="{{ product.image.url }}" alt="{{ product.name }}">
+              {% endif %}
+              <a href="{% url 'singleproduct' product_id=product.id %}"> <h4>{{ product.name }}</h4></a>
+              <p>$ {{ product.price }}</p>
+              <small>only {{ product.quantity }} pieces left</small>
+              <a href="{% url 'add_to_cart' product_id=product.id %}" class="btn">Add to Cart</a>
+            </div>
+            {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 My Online Store. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+{% endblock %}

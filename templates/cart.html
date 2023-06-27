@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'styles/cart.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - legion Kenya</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Your Cart</h1>
+
+        <div class="cart-item">
+            {% for item in items %}
+            <li>{{ item.product.name }} - Quantity: {{ item.quantity }}</li>
+            {% if item.product.image %}
+              <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+            {% endif %}
+
+            {% endfor %}
+            <p>Total Price: ${{ total_price }}</p>
+        </div>
+        <a href="{% url 'checkout' %}" class="checkout-button">Proceed to Checkout</a>
+    </div>
+</body>
+
+</html>
+
+{% endblock %}

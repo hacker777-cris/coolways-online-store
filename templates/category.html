@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/category.css' %}">
+<div class="categories-container">
+    {% for category in categories %}
+    <div class="category-card">
+        <img src="{% static 'category_image.jpg' %}" alt="{{ category.name }}" class="category-image">
+        <h3 class="category-name">{{ category.name }}</h3>
+
+        <div class="product-list">
+            {% for product in category.products.all %}
+            <div class="product-card">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                <h4 class="product-name">{{ product.name }}</h4>
+                <p class="product-price">{{ product.price }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
