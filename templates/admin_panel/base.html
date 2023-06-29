@@ -1,0 +1,47 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'admin_panel/css/dashboard.css' %}">
+
+<div class="navbar">
+    <ul class="navbar-menu">
+        <li><a href="{% url 'admin_panel:dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'admin_panel:products' %}">Manage Products</a></li>
+        <li><a href="{% url 'admin_panel:carts' %}">Manage Carts</a></li>
+    </ul>
+</div>
+
+<style>
+    .navbar {
+        background-color: #006699;
+        color: #fff;
+        padding: 10px;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+    }
+
+    .navbar-menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+
+    .navbar-menu li {
+        margin-right: 20px;
+    }
+
+    .navbar-menu li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px;
+        transition: background-color 0.3s;
+    }
+
+    .navbar-menu li a:hover {
+        background-color: #004466;
+    }
+</style>
+
+{% block content %}
+
+{% endblock %}

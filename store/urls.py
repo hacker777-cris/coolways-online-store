@@ -4,6 +4,10 @@ from django.conf.urls.static import static
 
 from store.views import payment_success_view, categories_view,home_view,signup_view,checkout_view,login_view,products_view,profile,addProduct,logoutuser,cart,add_to_cart,singleproduct_view
 from payments.views import initiate_payment,payment_callback
+
+app_name = 'store'
+
+
 urlpatterns = [
     path('',home_view,name = 'home'),
     path('signup',signup_view,name='signup'),

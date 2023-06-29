@@ -33,7 +33,7 @@
   </div>
   {% if request.user.is_authenticated %}
   <p>Hello {{request.user}}</p>
-  <button><a href="{% url 'logout' %}">Logout</button>
+  <button><a href="{% url 'store:logout' %}">Logout</button>
   {% endif %}
 </div>
   </div>

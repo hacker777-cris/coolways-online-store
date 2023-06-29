@@ -39,7 +39,7 @@ def signup_view(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}! You can now log in.')
-            return redirect('login')
+            return redirect('store:login')
     else:
         form = UserCreationForm()
     
@@ -74,7 +74,7 @@ def checkout_view(request):
         # Clear the cart after successful payment
         cart.products.clear()
         
-        return redirect('payment_success')
+        return redirect('store:payment_success')
     
     context = {
         'cart': cart,
@@ -91,7 +91,7 @@ def payment_success_view(request):
 def login_view(request):
     page = 'login'
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('store:home')
 
     if request.method == 'POST':
         username = request.POST.get('username').lower()
@@ -107,7 +107,7 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('store:home')
             messages.success(request, 'Login Successful')
         else:
             messages.error(request, 'Username or Password is incorrect!!!')
@@ -123,7 +123,7 @@ def login_view(request):
 
 def logoutuser(request):
     logout(request)
-    return redirect('home')
+    return redirect('store:home')
 
 def products_view(request):
     products = Product.objects.all()
@@ -159,11 +159,11 @@ def add_to_cart(request, product_id):
         cart_item.quantity += 1
         cart_item.save()
 
-    return redirect('cart')
+    return redirect('store:cart')
 
 
 
-@login_required(login_url='login')
+@login_required(login_url='store:login')
 def cart(request):
     cart = get_object_or_404(Cart, user=request.user)
     items = cart.cartitem_set.all()
@@ -172,7 +172,7 @@ def cart(request):
     return render(request, 'cart.html', {'cart': cart, 'items': items, 'total_price': total_price})
 
 
-@login_required(login_url='login')
+@login_required(login_url='store:login')
 def profile(request):
     user = request.user
     profile = UserProfile.objects.get(user=user)

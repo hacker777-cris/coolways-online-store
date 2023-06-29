@@ -10,7 +10,7 @@
         <li><a href="#">Home</a></li>
         <li><a href="#">Shop</a></li>
         <li><a href="#">Categories</a></li>
-        <li><a href="{% url 'profile' %}">{{request.user}}</a></li>
+        <li><a href="{% url 'store:profile' %}">{{request.user}}</a></li>
         <li><a href="#">Cart</a></li>
       </ul>
       <form class="search-bar" method="GET" action="">

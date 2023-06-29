@@ -1,0 +1,66 @@
+{% extends 'admin_panel/base.html' %}
+
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'admin_panel/css/manage_carts.css' %}">
+
+<h1 class="page-title">Manage Carts</h1>
+
+<table class="cart-table">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cart in carts %}
+        <tr>
+            <td>{{ cart.user }}</td>
+            <td>{{ cart.get_total_price }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<style>
+    .page-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    color: #333;
+}
+
+.cart-table td {
+    color: #666;
+}
+
+.cart-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.cart-table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+</style>
+
+{% endblock %}

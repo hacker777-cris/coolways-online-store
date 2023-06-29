@@ -1,0 +1,69 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'admin_panel/css/product_detail.css' %}">
+
+<div class="product-detail">
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+    <div class="product-info">
+        <h1>{{ product.name }}</h1>
+        <p class="product-price">Ksh {{ product.price }}</p>
+        <p class="product-category">Category: {{ product.category }}</p>
+        <p class="product-quantity">Quantity: {{ product.quantity }}</p>
+        <a href="{% url 'store:addproduct' %}"><button class="add-to-cart-button">Add Product</button></a>
+    </div>
+</div>
+
+<style>
+.product-detail {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.product-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-info h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #FF5722;
+    margin-bottom: 10px;
+}
+
+.product-category {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.product-quantity {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.add-to-cart-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-to-cart-button:hover {
+    background-color: #45a049;
+}
+</style>

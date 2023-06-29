@@ -1,0 +1,73 @@
+{% extends 'admin_panel/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'admin_panel/css/manage_products.css' %}">
+
+<h1 class="page-title">Manage Products</h1>
+
+<table class="product-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td><a href="{% url 'admin_panel:product_detail' product.id %}">{{ product.name }}</a></td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.quantity }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<style>
+    .page-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+    padding: 10px;
+    text-align: left;
+}
+
+.product-table th {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.product-table td {
+    font-size: 14px;
+    color: #666;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-table a {
+    color: #333;
+    text-decoration: none;
+}
+
+.product-table a:hover {
+    text-decoration: underline;
+}
+
+</style>
+{% endblock %}

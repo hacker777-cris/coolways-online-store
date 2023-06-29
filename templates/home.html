@@ -19,9 +19,13 @@
       <ul class="menu">
         <li><a href="#">Home</a></li>
         <li><a href="#">Shop</a></li>
-        <li><a href="{% url 'categories' %}">Categories</a></li>
-        <li><a href="{% url 'profile' %}">{{request.user}}</a></li>
-        <li><a href="{% url 'cart' %}">Cart</a></li>
+        <li><a href="{% url 'store:categories' %}">Categories</a></li>
+        <li><a href="{% url 'store:profile' %}">{{request.user}}</a></li>
+        <li><a href="{% url 'store:cart' %}">Cart</a></li>
+        {% if request.user.is_superuser %}
+        <li><a href="{% url 'admin_panel:dashboard' %}">Admin_Panel</a></li>
+        {% endif %}
+    
       </ul>
       <form class="search-bar" method="GET" action="">
         <input type="text" name="q" placeholder="Search...">
@@ -53,10 +57,10 @@
               {% if product.image %}
               <img src="{{ product.image.url }}" alt="{{ product.name }}">
               {% endif %}
-              <a href="{% url 'singleproduct' product_id=product.id %}"> <h4>{{ product.name }}</h4></a>
+              <a href="{% url 'store:singleproduct' product_id=product.id %}"> <h4>{{ product.name }}</h4></a>
               <p>$ {{ product.price }}</p>
               <small>only {{ product.quantity }} pieces left</small>
-              <a href="{% url 'add_to_cart' product_id=product.id %}" class="btn">Add to Cart</a>
+              <a href="{% url 'store:add_to_cart' product_id=product.id %}" class="btn">Add to Cart</a>
             </div>
             {% endfor %}
       </div>

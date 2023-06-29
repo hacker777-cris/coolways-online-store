@@ -109,7 +109,7 @@ nav {
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #ff9f00;
+  background-color: blue;
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
@@ -117,7 +117,7 @@ nav {
 }
 
 .btn:hover {
-  background-color: #ff6f00;
+  background-color:  blue;
 }
 
 .featured-products {

@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{% static 'styles/check_out.css' %}">
   <div class="container">
     <h1 class="checkout-heading">Make a Payment</h1>
-    <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+    <form action="{% url 'store:checkout' %}" method="POST" id="payment-form">
       {% csrf_token %}
       <div id="card-element" class="card-element"></div>
       <div id="card-errors" role="alert" class="card-errors"></div>

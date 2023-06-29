@@ -1,0 +1,15 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block content %}
+
+
+<div>
+    {% for product in products %}
+    <div>
+        {{product.name}} 
+        {{product.price}}
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

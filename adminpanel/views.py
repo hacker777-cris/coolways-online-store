@@ -1,0 +1,53 @@
+from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from store.models import Cart, CartItem, Product, Category, UserProfile, Order, OrderItem
+
+def admin_dashboard(request):
+    # Logic for admin dashboard
+    total_products = Product.objects.count()
+    total_categories = Category.objects.count()
+    total_users = UserProfile.objects.count()
+    total_orders = Order.objects.count()
+    context = {
+        'total_products': total_products,
+        'total_categories': total_categories,
+        'total_users': total_users,
+        'total_orders': total_orders
+    }
+    return render(request, 'admin_panel/dashboard.html', context)
+
+def admin_product_view(request):
+    products = Product.objects.all()
+
+    context = {
+        'products':products
+    }
+
+    return render(request, 'admin_panel/adminproducts.html', context)
+
+def admin_carts(request):
+    # Logic for managing carts
+    carts = Cart.objects.all()
+    context = {
+        'carts': carts
+    }
+    return render(request, 'admin_panel/carts.html', context)
+
+def admin_products(request):
+    # Logic for managing products
+    products = Product.objects.all()
+    context = {
+        'products': products
+    }
+    return render(request, 'admin_panel/products.html', context)
+
+def admin_product_detail(request, product_id):
+    # Logic for viewing details of a specific product
+    product = get_object_or_404(Product, id=product_id)
+    context = {
+        'product': product
+    }
+    return render(request, 'admin_panel/product_detail.html', context)
+
+# Add more views as needed for other admin functionality
+

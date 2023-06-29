@@ -37,7 +37,9 @@ distro-info===1.1build1
 dj-database-url==2.0.0
 Django==4.2.1
 django-allauth==0.54.0
+django-extensions==3.2.3
 django-heroku==0.3.1
+django-on-heroku==1.1.2
 duplicity==0.8.21
 fasteners==0.14.1
 filelock==3.6.0
@@ -124,6 +126,8 @@ pysnmp==4.4.6
 python-apt==2.4.0+ubuntu1
 python-dateutil==2.8.1
 python-debian===0.1.43ubuntu1
+python-decouple==3.8
+python-dotenv==1.0.0
 python3-openid==3.2.0
 pythran==0.10.0
 pyttsx3==2.90

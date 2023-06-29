@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-pby^5wt7!v&!i&&q$ov_(g0z_=#qvu^eyb5j2hkcx%6jyh@e!z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store',
+    'adminpanel',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +125,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -136,6 +138,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STRIPE_PUBLIC_KEY = 'pk_test_51NNYXvEifafv1oQM5tUCoYE2QEtO2xooQVb5RsbQORoL2ZT7KnaBHnIqAdub6XFZT5I4o8xQOE3fT1c1jJVAJHP40047JNNd62'
-STRIPE_SECRET_KEY = 'sk_test_51NNYXvEifafv1oQMU0qOz9DrfLNNB5WG2jnHAzxmizAdUHU7T1Yk4EfUshB5A5fCNZBRCrB1Vk2P5N272Frgmd3E00UqN7mPbn'
-
+DARAJA_API_KEY = 'H7n9S5UZG2Sk8zRBZTgkBIEGKnBijEwF'
+DARAJA_API_SECRET = 'SuUcflZY6vZLvO6D'
+DARAJA_CALLBACK_URL = 'https://yourwebsite.com/payments/callback'

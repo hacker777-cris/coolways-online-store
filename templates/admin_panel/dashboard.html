@@ -1,0 +1,63 @@
+{% extends 'admin_panel/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'admin_panel/css/admin_dashboard.css' %}">
+
+<h1 class="page-title">Admin Dashboard</h1>
+
+<div class="dashboard-card">
+    <div class="card">
+        <a href="{% url 'admin:adminproducts' %}"><h3>Total Products</h3></a>
+        <p>{{ total_products }}</p>
+    </div>
+    <div class="card">
+        <h3>Total Categories</h3>
+        <p>{{ total_categories }}</p>
+    </div>
+    <div class="card">
+        <h3>Total Users</h3>
+        <p>{{ total_users }}</p>
+    </div>
+    <div class="card">
+        <h3>Total Orders</h3>
+        <p>{{ total_orders }}</p>
+    </div>
+</div>
+
+<style>
+    .page-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.dashboard-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 20px;
+}
+
+.card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+</style>
+
+{% endblock %}
