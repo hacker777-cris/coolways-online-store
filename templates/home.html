@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Online Store</title>
+  <title>COOLWAYS</title>
   <link rel="stylesheet" href="{% static 'styles/home.css' %}">
 </head>
 <body>
@@ -14,65 +14,69 @@
   <header>
     <nav>
       <div class="logo">
-        <h1>LEGION STORE</h1>
+        <img src="{% static 'images/coolways.png' %}" alt="Amazon">
       </div>
       <ul class="menu">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Shop</a></li>
-        <li><a href="{% url 'store:categories' %}">Categories</a></li>
-        <li><a href="{% url 'store:profile' %}">{{request.user}}</a></li>
+        <!-- <li><a href="#">Today's Deals</a></li>
+        <li><a href="#">Gift Cards</a></li> -->
+        <!--<li><a href="#">Sell</a></li>
+        <li><a href="#">Help</a></li>-->
+        <!-- <li><a href="{% url 'store:categories' %}">Categories</a></li> -->
+        <li><a href="{% url 'store:profile' %}">Account</a></li>
         <li><a href="{% url 'store:cart' %}">Cart</a></li>
+        <li><a href="#">Customer Service</a></li>
         {% if request.user.is_superuser %}
         <li><a href="{% url 'admin_panel:dashboard' %}">Admin_Panel</a></li>
         {% endif %}
-    
       </ul>
       <form class="search-bar" method="GET" action="">
         <input type="text" name="q" placeholder="Search...">
         <button type="submit">Search</button>
       </form>
-      
     </nav>
   </header>
-  <div class="categories-container">
-    <h3>Categories</h3>
-    <div class="category-list">
-      {% for category in categories %}
-        <div class="category-card">
-          <img src="{% static 'category_image.jpg' %}" alt="{{ category.name }}" class="category-image">
-          <h4 class="category-name">{{ category.name }}</h4>
-          <!-- Add more category details or links here -->
-        </div>
-      {% endfor %}
-    </div>
-  </div>
+  
   <!-- Main Content -->
   <main>
-    <section class="featured-products">
-      <h3>Featured Products</h3>
-      <div class="product-list">
+    <div class="content-container">
+      <div class="categories-container">
+        <h3>Categories</h3>
+        <div class="category-list">
+          {% for category in categories %}
+            <div class="category-card">
+              <img src="{% static 'category_image.jpg' %}" alt="{{ category.name }}" class="category-image">
+              <h4 class="category-name">{{ category.name }}</h4>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <section class="featured-products">
+        <h3>Featured Products</h3>
         <div class="product-list">
-            {% for product in products %}
+          {% for product in products %}
             <div class="product-card">
               {% if product.image %}
               <img src="{{ product.image.url }}" alt="{{ product.name }}">
               {% endif %}
-              <a href="{% url 'store:singleproduct' product_id=product.id %}"> <h4>{{ product.name }}</h4></a>
+              <a href="{% url 'store:singleproduct' product_id=product.id %}"><h4>{{ product.name }}</h4></a>
               <p>$ {{ product.price }}</p>
-              <small>only {{ product.quantity }} pieces left</small>
+              <h5>Only {{ product.quantity }} pieces left</h5>
               <a href="{% url 'store:add_to_cart' product_id=product.id %}" class="btn">Add to Cart</a>
             </div>
-            {% endfor %}
-      </div>
-    </section>
+          {% endfor %}
+        </div>
+      </section>
+    </div>
   </main>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2023 My Online Store. All rights reserved.</p>
+    <p>&copy; 2023 Coolways. All rights reserved.</p>
   </footer>
+<!-- 
+  <script src="{% static 'js/script.js' %}"></script> -->
 
-  <script src="script.js"></script>
 </body>
 </html>
 

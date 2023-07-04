@@ -33,6 +33,14 @@ def admin_carts(request):
     }
     return render(request, 'admin_panel/carts.html', context)
 
+def admin_view_carts(request, cart_id):
+    # Logic for managing carts
+    carts = Cart.objects.get(id=cart_id)
+    context = {
+        'carts': carts
+    }
+    return render(request, 'admin_panel/view_carts.html', context)
+
 def admin_products(request):
     # Logic for managing products
     products = Product.objects.all()
@@ -50,4 +58,14 @@ def admin_product_detail(request, product_id):
     return render(request, 'admin_panel/product_detail.html', context)
 
 # Add more views as needed for other admin functionality
+
+def admin_orders_view(request):
+    orders = Order.objects.all()
+
+    context = {
+        'orders':orders
+
+    }
+
+    return render(request,'admin_panel/orders.html',context)
 

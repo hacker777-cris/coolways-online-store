@@ -6,9 +6,22 @@
     <h1 class="checkout-heading">Make a Payment</h1>
     <form action="{% url 'store:checkout' %}" method="POST" id="payment-form">
       {% csrf_token %}
-      <div id="card-element" class="card-element"></div>
+      <div>
+        <label for="payment_method">Payment Method:</label>
+        <select name="payment_method" id="payment_method">
+          <option value="online">Online Payment</option>
+          <option value="delivery">Pay on Delivery</option>
+        </select>
+      </div>
+      <div id="card-element" class="card-element">
+        <!-- Card element code -->
+      </div>
       <div id="card-errors" role="alert" class="card-errors"></div>
-      <button id="payment-button" class="payment-button">Pay with Card</button>
+      <div id="delivery-details" style="display: none;">
+        <label for="delivery_location">Delivery Location:</label>
+        <input type="text" name="delivery_location" id="delivery_location">
+      </div>
+      <button id="payment-button" class="payment-button">Place Order</button>
     </form>
   </div>
 
@@ -45,18 +58,40 @@
       }
     });
 
+    var paymentMethodSelect = document.getElementById('payment_method');
+    var cardElementContainer = document.getElementById('card-element');
+    var deliveryDetailsContainer = document.getElementById('delivery-details');
+
+    paymentMethodSelect.addEventListener('change', function(event) {
+      var selectedPaymentMethod = event.target.value;
+
+      if (selectedPaymentMethod === 'online') {
+        cardElementContainer.style.display = 'block';
+        deliveryDetailsContainer.style.display = 'block';
+      } else {
+        cardElementContainer.style.display = 'none';
+        deliveryDetailsContainer.style.display = 'block';
+      }
+    });
+
     var form = document.querySelector('#payment-form');
     form.addEventListener('submit', function(event) {
       event.preventDefault();
 
-      stripe.createToken(card).then(function(result) {
-        if (result.error) {
-          var errorElement = document.getElementById('card-errors');
-          errorElement.textContent = result.error.message;
-        } else {
-          stripeTokenHandler(result.token);
-        }
-      });
+      var paymentMethod = document.getElementById('payment_method').value;
+
+      if (paymentMethod === 'online') {
+        stripe.createToken(card).then(function(result) {
+          if (result.error) {
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+          } else {
+            stripeTokenHandler(result.token);
+          }
+        });
+      } else {
+        form.submit();
+      }
     });
 
     function stripeTokenHandler(token) {

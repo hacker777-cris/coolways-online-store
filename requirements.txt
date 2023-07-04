@@ -51,7 +51,10 @@ frozenlist==1.3.3
 fs==2.4.12
 future==0.18.2
 gast==0.5.2
+google-api-python-client==1.7.11
 google-auth==2.20.0
+google-auth-httplib2==0.1.0
+greenlet==1.1.2
 gunicorn==20.1.0
 gyp==0.1
 html5lib==1.1
@@ -84,6 +87,7 @@ mpmath==0.0.0
 multidict==6.0.4
 netifaces==0.11.0
 numpy==1.24.3
+oauth2client==4.1.3
 oauthlib==3.2.0
 olefile==0.46
 opencv-python==4.7.0.72
@@ -111,6 +115,7 @@ pycparser==2.21
 pycryptodome==3.17
 pycryptodomex==3.17
 pycups==2.0.1
+PyDrive==1.3.1
 Pygments==2.11.2
 PyGObject==3.42.1
 pyinotify==0.9.6
@@ -145,6 +150,7 @@ SecretStorage==3.3.1
 simplejson==3.17.6
 six==1.16.0
 soupsieve==2.4.1
+SQLAlchemy==1.4.31
 sqlparse==0.4.4
 stripe==5.4.0
 sympy==1.9
@@ -162,6 +168,7 @@ ufoLib2==0.13.1
 ufw==0.36.1
 unattended-upgrades==0.1
 unicodedata2==14.0.0
+uritemplate==3.0.1
 urllib3==1.24.3
 usb-creator==0.3.7
 vboxapi==1.0

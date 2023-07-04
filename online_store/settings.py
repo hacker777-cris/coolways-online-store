@@ -88,6 +88,18 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
+# settings.py
+# ...
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'crispusgikonyo@gmail.com'  # Update with your email address
+EMAIL_HOST_PASSWORD = 'Sx033880_'  # Update with your email password or app password
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+# ...
 
 
 AUTH_PASSWORD_VALIDATORS = [

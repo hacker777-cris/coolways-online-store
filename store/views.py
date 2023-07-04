@@ -54,39 +54,48 @@ def checkout_view(request):
     user = request.user
     cart = Cart.objects.get(user=user)
     total_price = cart.get_total_price()
-    
+
     if request.method == 'POST':
-        token = request.POST.get('stripeToken')
-        charge = stripe.Charge.create(
-            amount=int(total_price * 100),
-            currency='usd',
-            description='Online Store Purchase',
-            source=token,
-        )
-        
-        # Create an order based on the purchased items
-        order = Order.objects.create(user=user, total_price=total_price)
-        for cart_item in cart.cartitem_set.all():
-            product = cart_item.product
-            quantity = cart_item.quantity
-            OrderItem.objects.create(order=order, product=product, quantity=quantity)
-        
-        # Clear the cart after successful payment
+        payment_method = request.POST.get('payment_method')
+
+        if payment_method == 'online':
+            # Process online payment using Stripe or your preferred payment gateway
+            token = request.POST.get('stripeToken')
+            charge = stripe.Charge.create(
+                amount=int(total_price * 100),
+                currency='usd',
+                description='Online Store Purchase',
+                source=token,
+            )
+            return redirect('store:payment_success')
+        elif payment_method == 'delivery':
+            # Create an order with pay on delivery option
+            order = Order.objects.create(user=user, total_price=total_price, payment_method='delivery', delivery_location=delivery_location)
+            for cart_item in cart.cartitem_set.all():
+                product = cart_item.product
+                quantity = cart_item.quantity
+                OrderItem.objects.create(order=order, product=product, quantity=quantity)
+
+        # Clear the cart after successful payment or order creation
         cart.products.clear()
-        
-        return redirect('store:payment_success')
-    
+
+        return redirect('store:ordersuccess')
+
     context = {
         'cart': cart,
         'total_price': total_price,
         'stripe_publishable_key': 'pk_test_51NNYXvEifafv1oQM5tUCoYE2QEtO2xooQVb5RsbQORoL2ZT7KnaBHnIqAdub6XFZT5I4o8xQOE3fT1c1jJVAJHP40047JNNd62',
     }
-    
+
     return render(request, 'checkout.html', context)
 
+def order_success_view(request):
+
+    return render(request,'ordersuccess.html',{})
 def payment_success_view(request):
     # Logic for payment success
     return render(request, 'payment_success.html')
+
 
 def login_view(request):
     page = 'login'
@@ -149,7 +158,7 @@ def singleproduct_view(request, product_id):
     }
     return render(request, 'singleproduct.html', context)
 
-
+@login_required(login_url='store:login')
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart, created = Cart.objects.get_or_create(user=request.user)
@@ -171,14 +180,23 @@ def cart(request):
     
     return render(request, 'cart.html', {'cart': cart, 'items': items, 'total_price': total_price})
 
-
 @login_required(login_url='store:login')
 def profile(request):
     user = request.user
-    profile = UserProfile.objects.get(user=user)
+    try:
+        profile = UserProfile.objects.get(user=user)
+    except UserProfile.DoesNotExist:
+        profile = None
+    
+    completed_orders = Order.objects.filter(user=user, payment_method='online')
+    pay_on_delivery_orders = Order.objects.filter(user=user, payment_method='delivery')
+    
+
     context = {
         'user': user,
-        'profile': profile
+        'profile': profile,
+        'completed_orders':completed_orders,
+        'pay_on_delivery_orders':pay_on_delivery_orders
     }
     return render(request, 'profile.html', context)
 

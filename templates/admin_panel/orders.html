@@ -1,0 +1,41 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block content %}
+
+<style>
+    .order {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #f8f8f8;
+    }
+
+    .order-info {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .order-user {
+        color: #337ab7;
+    }
+
+    .order-price {
+        color: #5cb85c;
+    }
+
+    .order-date {
+        color: #d9534f;
+    }
+</style>
+
+<div>
+    {% for order in orders %}
+    <div class="order">
+        <div class="order-info order-user">{{ order.user }}</div>
+        <div class="order-info order-price">{{ order.total_price }}</div>
+        <div class="order-info order-date">{{ order.created_at }}</div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

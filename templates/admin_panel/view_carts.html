@@ -1,0 +1,28 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block content %}
+
+<style>
+    .cart-container {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #f8f8f8;
+    }
+
+    .cart-user {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .cart-products {
+        color: #333;
+    }
+</style>
+
+<div class="cart-container">
+    <div class="cart-user">{{ carts.user }}</div>
+    <div class="cart-products">{{ carts.products }}</div>
+</div>
+
+{% endblock %}
