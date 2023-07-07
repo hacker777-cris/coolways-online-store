@@ -48,7 +48,6 @@ def signup_view(request):
         }
     
     return render(request, 'signup.html',context)
-
 @login_required
 def checkout_view(request):
     user = request.user
@@ -69,6 +68,7 @@ def checkout_view(request):
             )
             return redirect('store:payment_success')
         elif payment_method == 'delivery':
+            delivery_location = request.POST.get('delivery_location')  # Get the delivery location from the request
             # Create an order with pay on delivery option
             order = Order.objects.create(user=user, total_price=total_price, payment_method='delivery', delivery_location=delivery_location)
             for cart_item in cart.cartitem_set.all():

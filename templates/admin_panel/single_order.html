@@ -1,0 +1,24 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block content %} 
+
+<h3>Order User -- {{user_order.user}}</h3>
+
+<h5>Date of order -- {{user_order.created_at}}</h5>
+<h5>Payment method -- {{user_order.payment_method}}</h5>
+<h5>Delivery location -- {{user_order.delivery_location}}</h5>
+<h5>Order total $ -- {{user_order.total_price}}</h5>
+
+<h2>Products:</h2>
+<ul>
+  {% if products %}
+    {% for product in products.all %}
+      <li>{{ product.name }}</li>
+    {% endfor %}
+  {% else %}
+    <li>No products found</li>
+  {% endif %}
+</ul>
+
+
+{% endblock %}

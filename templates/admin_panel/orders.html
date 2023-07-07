@@ -30,11 +30,13 @@
 
 <div>
     {% for order in orders %}
-    <div class="order">
-        <div class="order-info order-user">{{ order.user }}</div>
-        <div class="order-info order-price">{{ order.total_price }}</div>
-        <div class="order-info order-date">{{ order.created_at }}</div>
-    </div>
+    <a href="{% url 'admin_panel:single_order' order_id=order.id %}">
+        <div class="order">
+            <div class="order-info order-user">{{ order.user }}</div>
+            <div class="order-info order-price">{{ order.total_price }}</div>
+            <div class="order-info order-date">{{ order.created_at }}</div>
+        </div>
+    </a>
     {% endfor %}
 </div>
 

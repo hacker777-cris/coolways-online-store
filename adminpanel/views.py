@@ -69,3 +69,18 @@ def admin_orders_view(request):
 
     return render(request,'admin_panel/orders.html',context)
 
+def single_order_view(request, order_id):
+    print("Entering single_order_view")
+    user_order = Order.objects.get(id=order_id)
+    print("user_order:", user_order)
+    products = user_order.products.all()
+    print("products:", products)
+    context = {
+        'user_order': user_order,
+        'products': products
+    }
+
+    return render(request, 'admin_panel/single_order.html', context)
+
+
+
