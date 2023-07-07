@@ -3,40 +3,29 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'styles/cart.css' %}">
-<!DOCTYPE html>
-<html lang="en">
+<div class="container">
+    <h1>Your Cart</h1>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cart - legion Kenya</title>
-    <style>
-
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <h1>Your Cart</h1>
-
+    <div class="cart-items">
+        {% for item in items %}
         <div class="cart-item">
-            {% for item in items %}
-            <li>{{ item.product.name }} - Quantity: {{ item.quantity }}</li>
+            <div class="item-info">
+                <h3 class="item-name">{{ item.product.name }}</h3>
+                <span class="item-quantity">Quantity: {{ item.quantity }}</span>
+                <span class="item-price">Price: ${{ item.product.price }}</span>
+            </div>
             {% if item.product.image %}
-              <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+              <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="item-image">
             {% endif %}
-
-            {% endfor %}
-            <p>Total Price: ${{ total_price }}</p>
         </div>
-        <a href="{% url 'store:checkout' %}" class="checkout-button">Proceed to Checkout</a>
+        {% endfor %}
+        <p class="total-price">Total Price: ${{ total_price }}</p>
     </div>
+    <a href="{% url 'store:checkout' %}" class="checkout-button">Proceed to Checkout</a>
+</div>
 
-    <div>
-        <a href="{% url 'store:home' %}" class="btn">Continue shopping</a>
-    </div>
-</body>
-
-</html>
+<div class="continue-shopping">
+    <a href="{% url 'store:home' %}" class="btn">Continue shopping</a>
+</div>
 
 {% endblock %}

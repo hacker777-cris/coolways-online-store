@@ -3,56 +3,47 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'styles/profile_style.css' %}">
-<div>
-    {% if profile_picture %}
-    <img src="{{ profile.profile_picture.url }}" alt="No profile">
-    {% endif %}
-    <h4>Hello {{ profile.user }}</h4>
-    <h4>Email: {{ profile.email }}</h4>
-</div>
 <div class="profile-container">
-  <h2>Order History</h2>
-  <h3>Completed Orders</h3>
-  <table class="order-table">
-    <thead>
-      <tr>
-        <th>Order ID</th>
-        <th>Total Price</th>
-        <th>Date Created</th>
-        <th>Delivery Location</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for order in completed_orders %}
-      <tr>
-        <td>{{ order.id }}</td>
-        <td>${{ order.total_price }}</td>
-        <td>{{ order.created_at }}</td>
-        <td>{{ order.delivery_location }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-  <h3>Pay on Delivery Orders</h3>
-  <table class="order-table">
-    <thead>
-      <tr>
-        <th>Order ID</th>
-        <th>Total Price</th>
-        <th>Date Created</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for order in pay_on_delivery_orders %}
-      <tr>
-        <td>{{ order.id }}</td>
-        <td>${{ order.total_price }}</td>
-        <td>{{ order.created_at }}</td>
-        <td>{{ order.delivery_location }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+    <div class="profile-header">
+        {% if profile_picture %}
+        <img src="{{ profile.profile_picture.url }}" alt="No profile" class="profile-picture">
+        {% endif %}
+        <h2 class="profile-name">Hello, {{ profile.user }}</h2>
+        <h4 class="profile-email">Email: {{ profile.email }}</h4>
+        <a href="{% url 'store:logout' %}" class="logout-button">Logout</a>
+    </div>
+    <div class="profile-orders">
+        <h3 class="section-heading">Order History</h3>
+        <div class="order-card">
+            <h4 class="card-title">Completed Orders</h4>
+            <ul class="order-list">
+                {% for order in completed_orders %}
+                <li class="order-item">
+                    <div class="order-info">
+                        <span class="order-id">Order ID: {{ order.id }}</span>
+                        <span class="order-price">Total Price: ${{ order.total_price }}</span>
+                        <span class="order-date">Date Created: {{ order.created_at }}</span>
+                        <span class="order-location">Delivery Location: {{ order.delivery_location }}</span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="order-card">
+            <h4 class="card-title">Pay on Delivery Orders</h4>
+            <ul class="order-list">
+                {% for order in pay_on_delivery_orders %}
+                <li class="order-item">
+                    <div class="order-info">
+                        <span class="order-id">Order ID: {{ order.id }}</span>
+                        <span class="order-price">Total Price: ${{ order.total_price }}</span>
+                        <span class="order-date">Date Created: {{ order.created_at }}</span>
+                        <span class="order-location">Delivery Location: {{ order.delivery_location }}</span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </div>
 {% endblock %}
