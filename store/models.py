@@ -32,7 +32,6 @@ class Product(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=100, default='hello')
-    slug = models.SlugField(unique=True)
 
     class Meta:
         verbose_name_plural = "categories"

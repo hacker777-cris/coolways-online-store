@@ -22,6 +22,7 @@ def home_view(request):
         )
     #products = Product.objects.all()  # Retrieve all products (or use a specific queryset)
      categories = Category.objects.all()
+     print(categories)
 
      context = {
         'categories':categories,
@@ -66,6 +67,7 @@ def checkout_view(request):
                 description='Online Store Purchase',
                 source=token,
             )
+            cart.products.clear()
             return redirect('store:payment_success')
         elif payment_method == 'delivery':
             delivery_location = request.POST.get('delivery_location')  # Get the delivery location from the request
@@ -75,9 +77,8 @@ def checkout_view(request):
                 product = cart_item.product
                 quantity = cart_item.quantity
                 OrderItem.objects.create(order=order, product=product, quantity=quantity)
-
+                cart.products.clear()
         # Clear the cart after successful payment or order creation
-        cart.products.clear()
 
         return redirect('store:ordersuccess')
 
@@ -142,13 +143,14 @@ def products_view(request):
     }
     return render(request, 'products.html', context)
 
-def categories_view(request):
-    categories = Category.objects.all()
-
+def category_view(request, pk):
+    category = Category.objects.get(id=pk)
+    products = category.product_set.all()
     context = {
-        'categories':categories
+        'category': category,
+        'products': products
     }
-    return render(request, 'category.html',context)
+    return render(request, 'category_products.html', context)
 
 def singleproduct_view(request, product_id):
     product = get_object_or_404(Product, id=product_id)

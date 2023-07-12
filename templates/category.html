@@ -16,10 +16,11 @@
                 <h4 class="product-name">{{ product.name }}</h4>
                 <p class="product-price">{{ product.price }}</p>
             </div>
+            {% empty %}
+            <p>No products available in this category.</p>
             {% endfor %}
         </div>
     </div>
     {% endfor %}
 </div>
 {% endblock %}
-
