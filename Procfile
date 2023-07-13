@@ -1,1 +1,2 @@
-web gunicorn coolways.wsgi:application --log-file -
+web: gunicorn coolways.wsgi
+
