@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+import django_on_heroku
 import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,11 +80,22 @@ WSGI_APPLICATION = 'online_store.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# # DATABASES = {
+# #     'default': {
+# #         'ENGINE': 'django.db.backends.sqlite3',
+# #         'NAME': BASE_DIR / 'db.sqlite3',
+# #     }
+# # }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE':'django.db.backends.postgresql_psycopg2',
+        'NAME':'d65cbkjtr15rem',
+        'USER':'nfwqdcopbjcdwm',
+        'PASSWORD':'8f10d909e66533430683df4aa93852755e50d9d56259c9ffed3dbd12ffc17190',
+        'HOST':'ec2-35-169-9-79.compute-1.amazonaws.com',
+        'PORT':'5432',
+      }
 }
 
 
@@ -157,4 +168,4 @@ DARAJA_API_KEY = 'H7n9S5UZG2Sk8zRBZTgkBIEGKnBijEwF'
 DARAJA_API_SECRET = 'SuUcflZY6vZLvO6D'
 DARAJA_CALLBACK_URL = 'https://yourwebsite.com/payments/callback'
 
-django_heroku.settings(locals())
+django_on_heroku.settings(locals())
