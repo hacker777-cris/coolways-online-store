@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn online-store.wsgi
+web gunicorn coolways.wsgi:application --log-file -
