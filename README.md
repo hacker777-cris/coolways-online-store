@@ -17,7 +17,7 @@ This is an online shop application currently under development. It aims to provi
 
 1. Clone the repository to your local machine:
 
-git clone https://github.com/hacker777-cris/legion-store.git
+git clone https://github.com/hacker777-cris/coolways-online-store.git
 
 css
 Copy code
