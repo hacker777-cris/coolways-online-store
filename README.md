@@ -1,4 +1,4 @@
-# legion-store
+# Coolways online store
 # online-shop-under-development-
 
 
