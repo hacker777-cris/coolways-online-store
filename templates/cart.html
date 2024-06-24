@@ -21,7 +21,13 @@
         {% endfor %}
         <p class="total-price">Total Price: ${{ total_price }}</p>
     </div>
-    <a href="{% url 'store:checkout' %}" class="checkout-button">Proceed to Checkout</a>
+    
+    <!-- Form to initiate Paystack payment -->
+    <form action="{% url 'store:paystackInitiatePayment' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="amount" value="{{ total_price }}">
+        <button type="submit" class="checkout-button">Proceed to Checkout</button>
+    </form>
 </div>
 
 <div class="continue-shopping">
