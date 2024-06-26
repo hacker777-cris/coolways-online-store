@@ -42,11 +42,13 @@ INSTALLED_APPS = [
     "adminpanel",
     "payments",
     "rest_framework",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -161,3 +163,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 DARAJA_API_KEY = "H7n9S5UZG2Sk8zRBZTgkBIEGKnBijEwF"
 DARAJA_API_SECRET = "SuUcflZY6vZLvO6D"
 DARAJA_CALLBACK_URL = "https://yourwebsite.com/payments/callback"
+
+
+CORS_ALLOW_ALL_ORIGINS = True
