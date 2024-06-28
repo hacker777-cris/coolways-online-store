@@ -3,4 +3,10 @@ from . import views
 
 urlpatterns = [
     path("products/", views.GetProducts.as_view(), name="get_products"),
+    path("get-product/", views.GetProduct.as_view(), name="get_product"),
+    path(
+        "get-product-by-category/",
+        views.GetProductsByCategory.as_view(),
+        name="get-product-by-category",
+    ),
 ]
