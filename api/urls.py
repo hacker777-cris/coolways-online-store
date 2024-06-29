@@ -9,4 +9,7 @@ urlpatterns = [
         views.GetProductsByCategory.as_view(),
         name="get-product-by-category",
     ),
+    path("get-cart/", views.GetCart.as_view(), name="get-cart"),
+    path("add-to-cart/", views.AddToCart.as_view()),
+    path("login/", views.LoginView.as_view()),
 ]
