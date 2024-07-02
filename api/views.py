@@ -8,10 +8,16 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from .serializers import SignupSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
+from .utils.decorator import jwt_required
 
 
-@method_decorator(csrf_exempt, name="dispatch")
 class GetProducts(APIView):
+    @method_decorator(jwt_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
     def get(self, request):
         try:
             products = Product.objects.all()
@@ -137,13 +143,18 @@ class LoginView(APIView):
             username = request.data.get("username").lower()
             password = request.data.get("password")
 
-            user = User.objects.get(username=username)
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
                 login(request, user)
+                refresh = RefreshToken.for_user(user)
                 return Response(
-                    {"success": True, "Message": "User logged in successfully"}
+                    {
+                        "success": True,
+                        "Message": "User logged in successfully",
+                        "access": str(refresh.access_token),
+                        "refresh": str(refresh),
+                    }
                 )
             else:
                 return Response({"success": False, "Message": "Invalid credentials"})
@@ -154,3 +165,15 @@ class LoginView(APIView):
                 {"success": False, "error": str(e)},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+
+
+class SignupView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = SignupSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"success": True, "Message": "User Created successfully"},
+                status=status.HTTP_201_CREATED,
+            )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
