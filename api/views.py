@@ -13,6 +13,16 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .utils.decorator import jwt_required
 
 
+class HealthCheckView(APIView):
+    def get(self, request):
+        return Response(
+            {
+                "success": True,
+                "Message": "If you see this the server is running on v2.0.7",
+            }
+        )
+
+
 class GetProducts(APIView):
     @method_decorator(jwt_required)
     def dispatch(self, *args, **kwargs):
