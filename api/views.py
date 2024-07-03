@@ -32,8 +32,11 @@ class GetProducts(APIView):
             )
 
 
-@method_decorator(csrf_exempt, name="dispatch")
 class GetProduct(APIView):
+    @method_decorator(jwt_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
     def get(self, request):
         try:
             id = request.query_params.get("id")
@@ -60,8 +63,11 @@ class GetProduct(APIView):
             )
 
 
-@method_decorator(csrf_exempt, name="dispatch")
 class GetProductsByCategory(APIView):
+    @method_decorator(jwt_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
     def get(self, request):
         try:
             category_name = request.query_params.get("category")
@@ -89,8 +95,11 @@ class GetProductsByCategory(APIView):
             )
 
 
-@method_decorator(csrf_exempt, name="dispatch")
 class GetCart(APIView):
+    @method_decorator(jwt_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
     def get(self, request):
         try:
             user = request.user
@@ -110,8 +119,11 @@ class GetCart(APIView):
             )
 
 
-@method_decorator(csrf_exempt, name="dispatch")
 class AddToCart(APIView):
+    @method_decorator(jwt_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
     def post(self, request):
         try:
             product_id = request.data.get("product_id")
